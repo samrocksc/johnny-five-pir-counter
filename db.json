@@ -1,0 +1,15 @@
+{
+  "traffic": [
+    {
+      "date": "date",
+      "street": "street",
+      "entry": "entry"
+    },
+    {
+      "date": "12/10/2014",
+      "street": 18,
+      "entry": 38
+    }
+  ],
+  "songs": []
+}

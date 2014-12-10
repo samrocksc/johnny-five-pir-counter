@@ -1,3 +1,13 @@
+//Fixing Date
+var currentTime = new Date()
+var month = currentTime.getMonth() + 1
+var day = currentTime.getDate()
+var year = currentTime.getFullYear()
+var thedate = (month + "/" + day + "/" + year)
+//Declare LowDB flatfile db
+var low = require('lowdb')
+var db = low('db.json')
+//declare johnny-five board
 var five = require('johnny-five')
 var board = new five.Board()
 board.on("ready", function() {
@@ -12,22 +22,18 @@ board.on("ready", function() {
     freq: 1000
   });
 
-  //scale sensor A0 between 1-2
+  //scale sensor A0 between 0-10
   sensor1.scale([0, 10]).on("data", function() {
-    if(this.value < 1){
-	console.log('A0 Inactive');	
-    } else{
-       	  console.log('A0 has motion');
-       };
+    if(this.value > 0){
+      console.log('A0 detects motion'); 
+    };
   });
 
-  //scale sensor A1 between 1-2
+  //scale sensor A1 between 0-10
   sensor2.scale([0, 10]).on("data", function() {
-    if(this.value < 1){
-	console.log('A1 Inactive'); 
-    } else{
-          console.log('A1 has motion');
-	};
+    if(this.value > 1){
+      console.log('A1 detects motion');   
+    };
   });
 
 });
