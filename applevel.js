@@ -7,6 +7,7 @@ var month = currentTime.getMonth() + 1
 var day = currentTime.getDate()
 var year = currentTime.getFullYear()
 var currentDate = (month + "/" + day + "/" + year)
+
 //manipulating Data
 var currentEntry = db('traffic').where({
     date: currentDate
@@ -14,16 +15,18 @@ var currentEntry = db('traffic').where({
 var currentStreet = db('traffic').where({
     date: currentDate
 }).pluck('street').value()[0]
-var addEntry = currentEntry+1;
-var addStreet = currentStreet+1;
 
-function insertEntry(){
-db('traffic').find({
-    date: currentDate
-}).assign({
-    entry: addEntry
-})
-db.save()
+//Add one to each section
+var addEntry = currentEntry++;
+var addStreet = currentStreet++;
+
+function insertEntry() {
+    db('traffic').find({
+        date: currentDate
+    }).assign({
+        entry: addEntry
+    });
+    db.save('db.json');
 };
 
 function insertStreet() {
@@ -32,15 +35,15 @@ function insertStreet() {
     }).assign({
         street: addStreet
     });
-    db.save();
-}
+    db.save('db.json');
+};
 
 //declare johnny-five board
 var five = require('johnny-five')
 var board = new five.Board()
 board.on("ready", function() {
 
-// Create a new `sensor` hardware instance.
+    // Create a new `sensor` hardware instance.
      
     sensor1 = new five.Sensor({  
         pin: "A0",
@@ -52,23 +55,7 @@ board.on("ready", function() {
     });
 
     //scale sensor A0 between 0-10
-     
-    sensor1.scale([0, 10]).on("data", function() {
-        if (this.value > 0) {
-            console.log('A0 detects motion');
-            //add an entry
-            insertEntry();
-            console.log(currentEntry);
-        }; 
-    });
-
-    //scale sensor A1 between 0-10
-    sensor2.scale([0, 10]).on("data", function() {
-        if (this.value > 0) {
-            console.log('A1 detects motion');
-            //add a street pass
-            insertStreet();
-            console.log(currentStreet);
-        };
-    });
-});
+  
+  insertStreet;
+  insertStreet;   
+};

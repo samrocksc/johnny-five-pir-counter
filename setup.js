@@ -8,4 +8,4 @@ var day = currentTime.getDate()
 var year = currentTime.getFullYear()
 var thedate = (month + "/" + day + "/" + year)
 
-db('traffic').push({ date: thedate, street: 'street', entry: 'entry'	})
+db('traffic').push({ date: thedate, street: 0, entry: 0	})

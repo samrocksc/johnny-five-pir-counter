@@ -18,12 +18,13 @@ var addEntry = parseInt(currentEntry) + 1;
 var addStreet = parseInt(currentStreet) + 1;
 
 //adding an entry
-function insertEntry(){
-db('traffic').find({
-    date: currentDate
-}).assign({
-    entry: addEntry
-})
-db.save()
-console.log(currentEntry);
+function insertEntry() {
+    db('traffic').find({
+        date: currentDate
+    }).assign({
+        entry: addEntry
+    })
+    db.save()
+    console.log(currentEntry);
 };
+insertEntry();
