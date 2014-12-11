@@ -7,32 +7,22 @@ var month = currentTime.getMonth() + 1
 var day = currentTime.getDate()
 var year = currentTime.getFullYear()
 var currentDate = (month + "/" + day + "/" + year)
-//manipulating Data
+    //manipulating Data
 var currentEntry = db('traffic').where({
     date: currentDate
 }).pluck('entry').value()[0]
 var currentStreet = db('traffic').where({
     date: currentDate
 }).pluck('street').value()[0]
-var addEntry = currentEntry+1;
-var addStreet = currentStreet+1;
+var addEntry = currentEntry + 1;
+var addStreet = currentStreet + 1;
 
-function insertEntry(){
-db('traffic').find({
-    date: currentDate
-}).assign({
-    entry: addEntry
-})
-db.save()
+function insertEntry() {
+
 };
 
 function insertStreet() {
-    db('traffic').find({
-        date: currentDate
-    }).assign({
-        street: addStreet
-    });
-    db.save();
+
 }
 
 //declare johnny-five board
@@ -40,11 +30,11 @@ var five = require('johnny-five')
 var board = new five.Board()
 board.on("ready", function() {
 
-// Create a new `sensor` hardware instance.
-     
-    sensor1 = new five.Sensor({  
+    // Create a new `sensor` hardware instance.
+
+    sensor1 = new five.Sensor({
         pin: "A0",
-          freq: 1000 
+        freq: 1000
     });
     sensor2 = new five.Sensor({
         pin: "A1",
@@ -52,23 +42,32 @@ board.on("ready", function() {
     });
 
     //scale sensor A0 between 0-10
-     
+
     sensor1.scale([0, 10]).on("data", function() {
         if (this.value > 0) {
             //add an entry
-            insertEntry();
-            console.log(currentEntry);
-            console.log('A0 detects motion');
-        }; 
+            db('traffic').find({
+                date: currentDate
+            }).assign({
+                entry: addEntry
+            })
+            db.save();
+            //shows current logs
+            console.log('A0 detects motion, there have been ' + currentEntry + ' business entries today.');
+        };
     });
 
     //scale sensor A1 between 0-10
     sensor2.scale([0, 10]).on("data", function() {
         if (this.value > 0) {
             //add a street pass
-            insertStreet();
-            console.log(currentStreet);
-            console.log('A1 detects motion');
+            db('traffic').find({
+                date: currentDate
+            }).assign({
+                street: addStreet
+            });
+            db.save();
+            console.log('A1 detects motion, there have been ' + currentStreet + ' business passings today.');
         };
     });
 });
