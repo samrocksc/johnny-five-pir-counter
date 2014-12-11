@@ -11,5 +11,3 @@ var currentEntry = db('traffic').where({date: currentDate}).pluck('entry').value
 var currentStreet = db('traffic').where({date: currentDate}).pluck('street').value()[0]
 
 console.log('The current entries are ' + currentEntry + ' and the current street crossings are ' + currentStreet);
-var addOne = currentEntry + 1;
-console.log('adding an entry to make ' + addOne);

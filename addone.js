@@ -14,4 +14,4 @@ var addEntry = parseInt(currentEntry)+1;
 var addStreet = parseInt(currentStreet)+1;
 
 console.log('The number of entries is ' + currentEntry + ' plus 1 = ' + addEntry );
-console.log(typeof currentEntry);
+

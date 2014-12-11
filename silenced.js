@@ -1,34 +1,36 @@
 //include lowdb
 var low = require('lowdb');
 var db = low('db.json');
-    //Fixing Date
+//Fixing Date
 var currentTime = new Date()
 var month = currentTime.getMonth() + 1
 var day = currentTime.getDate()
 var year = currentTime.getFullYear()
 var currentDate = (month + "/" + day + "/" + year)
-    //manipulating Data
+//manipulating Data
 var currentEntry = db('traffic').where({
     date: currentDate
 }).pluck('entry').value()[0]
 var currentStreet = db('traffic').where({
     date: currentDate
 }).pluck('street').value()[0]
+var addEntry = currentEntry+1;
+var addStreet = currentStreet+1;
 
-function addEntry() {
+function insertEntry(){
+db('traffic').find({
+    date: currentDate
+}).assign({
+    entry: addEntry
+})
+db.save()
+};
+
+function insertStreet() {
     db('traffic').find({
         date: currentDate
     }).assign({
-        entry: parseInt(currentEntry) + 1
-    });
-    db.save();
-}
-
-function addStreet() {
-    db('traffic').find({
-        date: currentDate
-    }).assign({
-        street: parseInt(currentStreet) + 1
+        street: addStreet
     });
     db.save();
 }
@@ -55,17 +57,17 @@ board.on("ready", function() {
         if (this.value > 0) {
             console.log('A0 detects motion');
             //add an entry
-            addEntry();
+            insertEntry();
             console.log(currentEntry);
         }; 
     });
 
     //scale sensor A1 between 0-10
     sensor2.scale([0, 10]).on("data", function() {
-        if (this.value > 1) {
+        if (this.value > 0) {
             console.log('A1 detects motion');
             //add a street pass
-            addStreet();
+            insertStreet();
             console.log(currentStreet);
         };
     });
