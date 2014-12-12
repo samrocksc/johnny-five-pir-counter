@@ -7,7 +7,7 @@ Used for creating a 2 way 90 degree people counter. Utilizes a breadboard to spl
 
 The goal of this sensor is for measuring pedestrian traffic in front of a business versus how many actually enter said business. This allows for testing atmospheres for new signage and various other methods of streetside advertisement.
 
-Includes: johnny-five and LowDB(lodashDB)
+Includes: johnny-five, lodash, lowdb(lodashDB), node-json-db,
 
 Equipment Needed
 ----
