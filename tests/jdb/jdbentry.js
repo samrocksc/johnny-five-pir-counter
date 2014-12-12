@@ -20,11 +20,13 @@ console.log('The number of entries today is ' + parseInt(entries));
 var passes = db.getData("/" + currentDate + "/Passes");
 console.log('The number of passes today is ' + parseInt(passes));
 
+//Adding an entry
 var entriesAdd = entries + 1;
 var passesAdd = passes + 1;
 
-console.log('I am inputting ' + passesAdd + ' to the passes and ' + entriesAdd + ' to the entries');
+//updates the json with a new entry
+console.log('I am inputting ' + entriesAdd + ' to the entries');
 db.push('/' + currentDate, {
     Entries: entriesAdd,
-    Passes: passesAdd
+    Passes: passes
 });
