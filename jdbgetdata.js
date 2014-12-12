@@ -15,7 +15,8 @@ var entire = db.getData("/");
 console.log(entire);
 
 var entries = db.getData("/"+currentDate+"/Entries");
-console.log('the number of entries is ' +parseInt(entries));
+console.log('The number of entries today is ' +parseInt(entries));
 
 var passes = db.getData("/"+currentDate+"/Passes");
-console.log('the number of passes is ' +parseInt(passes));
+console.log('The number of passes today is ' +parseInt(passes));
+

@@ -14,9 +14,17 @@ var db = new JsonDB("myDataBase", true, false);
 var entire = db.getData("/");
 console.log(entire);
 
-var entries = db.getData("/"+currentDate+"/Entries");
-console.log('the number of entries is ' +parseInt(entries));
+var entries = db.getData("/" + currentDate + "/Entries");
+console.log('The number of entries today is ' + parseInt(entries));
 
-var passes = db.getData("/"+currentDate+"/Passes");
-console.log('the number of passes is ' +parseInt(passes));
+var passes = db.getData("/" + currentDate + "/Passes");
+console.log('The number of passes today is ' + parseInt(passes));
 
+var entriesAdd = entries + 1;
+var passesAdd = passes + 1;
+
+console.log('I am inputting ' + passesAdd + ' to the passes and ' + entriesAdd + ' to the entries');
+db.push('/' + currentDate, {
+    Entries: entriesAdd,
+    Passes: passesAdd
+});
