@@ -1,6 +1,8 @@
 johnny-five-pir-counter
 =======================
 
+This is my first attempt at creating a johnny-five app to control an arduino.  A lot of what I create in this project will be persistent through future applications.  I really wanted to learn how to record data being sent from a sensor for analyzation.
+
 Used for creating a 2 way 90 degree people counter. Utilizes a breadboard to split 5v from an Arduino Nano and then pins A0/A1 to count two different sensors.
 
 The goal of this sensor is for measuring pedestrian traffic in front of a business versus how many actually enter said business. This allows for testing atmospheres for new signage and various other methods of streetside advertisement.
@@ -22,14 +24,9 @@ node app.js
 
 app.js
 ----
-Main file responsible for firing sensors.  
+Main file responsible for firing sensors and recording.
 
-db.json
+Future Features
 ----
-
-digital.js
-----
-
-silenced.js
-----
-
+* BLE interfacing using a LightBlue bean.
+* Recording times of entry for later inclusion into a graph.

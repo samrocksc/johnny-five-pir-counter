@@ -1,12 +1,12 @@
+//activate node-json-db
+var JsonDB = require('node-json-db');
+var db = new JsonDB("myDataBase", true, false);
 //Fixing Date
 var currentTime = new Date()
 var month = currentTime.getMonth() + 1
 var day = currentTime.getDate()
 var year = currentTime.getFullYear()
 var thedate = (month + "/" + day + "/" + year)
-//Declare LowDB flatfile db
-var low = require('lowdb')
-var db = low('db.json')
 //declare johnny-five board
 var five = require('johnny-five')
 var board = new five.Board()

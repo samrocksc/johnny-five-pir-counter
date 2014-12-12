@@ -14,8 +14,8 @@ var currentEntry = db('traffic').where({
 var currentStreet = db('traffic').where({
     date: currentDate
 }).pluck('street').value()[0]
-var addEntry = currentEntry + 1;
-var addStreet = currentStreet + 1;
+var addEntry = currentEntry++;
+var addStreet = currentStreet++;
 
 function insertEntry() {
 
@@ -52,7 +52,7 @@ board.on("ready", function() {
                 entry: addEntry
             })
             db.save();
-            //shows current logs
+            //Report back current logs
             console.log('A0 detects motion, there have been ' + currentEntry + ' business entries today.');
         };
     });
@@ -67,6 +67,7 @@ board.on("ready", function() {
                 street: addStreet
             });
             db.save();
+            //Report back current logs
             console.log('A1 detects motion, there have been ' + currentStreet + ' business passings today.');
         };
     });
