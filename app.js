@@ -12,6 +12,17 @@ var JsonDB = require('node-json-db');
 //The third argument is to ask JsonDB to save the database in an human readable format. (default false)
 var db = new JsonDB("myDataBase", true, true);
 var entire = db.getData("/");
+//Verify current data or create a new day
+try {
+var data = db.getData('/'+currentDate);
+} catch(error) {
+//catches the error and creates a new database entry for the day.
+db.push('/' + currentDate, {
+    Entries: 0,
+    Passes: 0
+});
+}
+
 //declare johnny-five board
 var five = require('johnny-five')
 var board = new five.Board()
