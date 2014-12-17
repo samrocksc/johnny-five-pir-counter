@@ -12,5 +12,13 @@ var JsonDB = require('node-json-db');
 var db = new JsonDB("myDataBase", true, true);
 var entire = db.getData("/");
 
-db.push("/test2/my/test/",5);
-db.save();
+try {
+var data = db.getData('/'+currentDate);
+} catch(error) {
+//The error will tell you where the DataPath stopped. In this case test1
+//Since /test1/test does't exist.
+db.push('/' + currentDate, {
+    Entries: 0,
+    Passes: 0
+});
+}

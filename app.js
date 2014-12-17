@@ -10,32 +10,27 @@ var JsonDB = require('node-json-db');
 //The second argument is used to tell the DB to save after each push
 //If you put false, you'll have to call the save() method.
 //The third argument is to ask JsonDB to save the database in an human readable format. (default false)
-var db = new JsonDB("myDataBase", true, false);
+var db = new JsonDB("myDataBase", true, true);
 var entire = db.getData("/");
-
-
-
 //declare johnny-five board
 var five = require('johnny-five')
 var board = new five.Board()
 board.on("ready", function() {
 
-      // Create a new `sensor` hardware instance.
-     
+    // Create a new `sensor` hardware instance.
     sensor1 = new five.Sensor({  
         pin: "A0",
-          freq: 1000 
+          freq: 2000
     });
     sensor2 = new five.Sensor({
         pin: "A1",
-        freq: 1000
+        freq: 2000
     });
 
-    //scale sensor A0 between 0-10
-     
+    //scale sensor A0 between 0-10     
     sensor1.scale([0, 10]).on("data", function() {
         if (this.value > 0) {
-            //Configure node-json-db
+            //passing variables 
             var entries = db.getData("/" + currentDate + "/Entries");
             var passes = db.getData("/" + currentDate + "/Passes");
             var entriesAdd = entries + 1;

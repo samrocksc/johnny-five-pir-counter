@@ -5,15 +5,15 @@ board.on("ready", function() {
   // Create a new `sensor` hardware instance.
   sensor1 = new five.Sensor({
     pin: "A0",
-    freq: 1000
+    freq: 300
   });
   sensor2 = new five.Sensor({
     pin: "A1",
-    freq: 1000
+    freq: 300
   });
 
   //scale sensor A0 between 1-2
-  sensor1.scale([0, 10]).on("data", function() {
+  sensor1.scale([0, 1000]).on("data", function() {
     if(this.value < 1){
 	console.log('A0 Inactive');	
     } else{
@@ -22,7 +22,7 @@ board.on("ready", function() {
   });
 
   //scale sensor A1 between 1-2
-  sensor2.scale([0, 10]).on("data", function() {
+  sensor2.scale([0, 1000]).on("data", function() {
     if(this.value < 1){
 	console.log('A1 Inactive'); 
     } else{
